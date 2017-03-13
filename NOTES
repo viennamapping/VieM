@@ -1,0 +1,11 @@
+=================================================
+A Format
+=================================================
+For a description of the graph format please have look into the manual.
+
+=================================================
+B Known Issues
+=================================================
+- please don't use comments in your graph files
+- use at least g++ 4.5
+
