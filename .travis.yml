@@ -1,0 +1,13 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_script:
+  - sudo apt-get -qq update
+
+script: 
+  - scons program=viem variant=optimized 
+  - scons program=graphchecker variant=optimized 
+  - scons program=generate_model variant=optimized 
+  - scons program=evaluator variant=optimized 
