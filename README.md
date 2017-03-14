@@ -33,3 +33,5 @@ Once you installed the packages, just type ./compile.sh. Once you did that you c
 ../deploy/evaluator model.graph --input_mapping=permutation --hierarchy_parameter_string=16:4:2 --distance_parameter_string=1:10:100
 
 For a description of the graph format please have look into the manual.
+
+Travis-CI Status [![Build Status](https://travis-ci.org/schulzchristian/VieM.svg?branch=master)](https://travis-ci.org/schulzchristian/viem)
