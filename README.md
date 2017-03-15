@@ -4,7 +4,7 @@ VieM v1.0
 VieM - Vienna Mapping and Sparse Quadratic Assignment -- is a family of mapping programs. It includes serveral heuristics to map a task graphs onto a specified processor graph. We provide them here as easy to use open source software. 
 
 Main project site:
-http://algo2.iti.kit.edu/viem
+http://viem.taa.univie.ac.at
 
 Installation Notes
 =====
