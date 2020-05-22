@@ -11,9 +11,6 @@ if [[ "$unamestr" == "Darwin" ]]; then
 fi
 
 
-scons program=viem variant=optimized -j $NCORES -c 
-scons program=graphchecker variant=optimized -j $NCORES -c 
-
 rm -rf deploy
-rm -rf optimized
+rm -rf build 
 rm -rf config.log

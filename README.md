@@ -9,12 +9,8 @@ http://viem.taa.univie.ac.at
 Installation Notes
 =====
 
-Before you can start you need to install the following software packages:
 
-- Scons (http://www.scons.org/)
-- Argtable (http://argtable.sourceforge.net/)
-
-Once you installed the packages, just type ./compile.sh. Once you did that you can try to run the following commands in the example folder:
+Just type ./compile_withcmake.sh. Once you did that you can try to run the following commands in the example folder:
 
 *//generate a model of communication and computation from an input graph, e.g. for sparse matrix vector multiplication*
 
@@ -35,3 +31,24 @@ Once you installed the packages, just type ./compile.sh. Once you did that you c
 For a description of the graph format please have look into the manual.
 
 Travis-CI Status [![Build Status](https://travis-ci.org/schulzchristian/VieM.svg?branch=master)](https://travis-ci.org/schulzchristian/viem)
+
+
+Licence
+=====
+
+The program is licenced under MIT. 
+If you publish results using our algorithms, please acknowledge our work by quoting the following paper:
+
+```
+@inproceedings{schulztraeff2017,
+             AUTHOR = {Schulz, Christian and Träff, Jesper Larsson},
+             TITLE = {{Better Process Mapping and Sparse Quadratic Assignment}},
+             BOOKTITLE = {{Proceedings of the 16th International Symposium on Experimental Algorithms (SEA'17)}},
+             SERIES = {{LIPIcs}},
+             PUBLISHER = {Dagstuhl},
+             VOLUME = {75},
+             PAGES = {4:1 -- 4:15},
+             NOTE = {Technical Report, arXiv:1702.04164},
+             YEAR = {2017}
+}
+```
