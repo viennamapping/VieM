@@ -40,6 +40,16 @@ The program is licenced under MIT.
 If you publish results using our algorithms, please acknowledge our work by quoting the following paper:
 
 ```
+@techreport{schulztraeff2017,
+             AUTHOR = {Faraj, Marcelo Fonseca and von Kirchbach, Konrad, and Lehr, Markus and Schulz, Christian and Träff, Jesper Larsson},
+             TITLE = {{VieM v1.00 -- Vienna Mapping and Sparse Quadratic Assignment User Guide}},
+             NOTE = {Technical Report, arXiv:1703.05509},
+             YEAR = {2017}
+}
+```
+If you use one-to-one mapping algorithms, please also cite the following: 
+
+```
 @inproceedings{schulztraeff2017,
              AUTHOR = {Schulz, Christian and Träff, Jesper Larsson},
              TITLE = {{Better Process Mapping and Sparse Quadratic Assignment}},
