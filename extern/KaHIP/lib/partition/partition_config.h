@@ -11,357 +11,354 @@
 #include "definitions.h"
 
 // Configuration for the partitioning.
-struct PartitionConfig
-{
-        PartitionConfig() {}
+struct PartitionConfig {
+  PartitionConfig() {}
 
+  //============================================================
+  //=======================MATCHING=============================
+  //============================================================
+  bool edge_rating_tiebreaking;
 
-        //============================================================
-        //=======================MATCHING=============================
-        //============================================================
-        bool edge_rating_tiebreaking;
+  EdgeRating edge_rating;
 
-        EdgeRating edge_rating;
-        
-        PermutationQuality permutation_quality;
+  PermutationQuality permutation_quality;
 
-        MatchingType matching_type;
-        
-        bool match_islands;
+  MatchingType matching_type;
 
-        bool first_level_random_matching;
-        
-        bool rate_first_level_inner_outer;
+  bool match_islands;
 
-        NodeWeight max_vertex_weight; 
-        
-        NodeWeight largest_graph_weight; 
+  bool first_level_random_matching;
 
-	NodeWeight work_load;
+  bool rate_first_level_inner_outer;
 
-        unsigned aggressive_random_levels;
-        
-        bool disable_max_vertex_weight_constraint;
+  NodeWeight max_vertex_weight;
 
-        //============================================================
-        //===================INITIAL PARTITIONING=====================
-        //============================================================
-        unsigned int initial_partitioning_repetitions;
+  NodeWeight largest_graph_weight;
 
-        unsigned int minipreps;
+  NodeWeight work_load;
 
-        bool refined_bubbling; 
+  unsigned aggressive_random_levels;
 
-        InitialPartitioningType initial_partitioning_type;
+  bool disable_max_vertex_weight_constraint;
 
-        bool initial_partition_optimize;
+  //============================================================
+  //===================INITIAL PARTITIONING=====================
+  //============================================================
+  unsigned int initial_partitioning_repetitions;
 
-        BipartitionAlgorithm bipartition_algorithm;
+  unsigned int minipreps;
 
-        bool initial_partitioning;
+  bool refined_bubbling;
 
-        int bipartition_tries;
+  InitialPartitioningType initial_partitioning_type;
 
-        int bipartition_post_fm_limits;
+  bool initial_partition_optimize;
 
-        int bipartition_post_ml_limits;
+  BipartitionAlgorithm bipartition_algorithm;
 
-        //============================================================
-        //====================REFINEMENT PARAMETERS===================
-        //============================================================
-        bool corner_refinement_enabled;
+  bool initial_partitioning;
 
-        bool use_bucket_queues;
+  int bipartition_tries;
 
-        RefinementType refinement_type;
+  int bipartition_post_fm_limits;
 
-        PermutationQuality permutation_during_refinement;
+  int bipartition_post_ml_limits;
 
-        ImbalanceType imbalance;
+  //============================================================
+  //====================REFINEMENT PARAMETERS===================
+  //============================================================
+  bool corner_refinement_enabled;
 
-        unsigned bubbling_iterations;
-       
-        unsigned kway_rounds; 
-       
-        bool quotient_graph_refinement_disabled; 
+  bool use_bucket_queues;
 
-        KWayStopRule kway_stop_rule;
+  RefinementType refinement_type;
 
-        double kway_adaptive_limits_alpha;
+  PermutationQuality permutation_during_refinement;
 
-        double kway_adaptive_limits_beta;
+  ImbalanceType imbalance;
 
-        unsigned max_flow_iterations;
+  unsigned bubbling_iterations;
 
-        unsigned local_multitry_rounds;
-        
-        unsigned local_multitry_fm_alpha;
+  unsigned kway_rounds;
 
-        bool graph_allready_partitioned;
+  bool quotient_graph_refinement_disabled;
 
-        unsigned int fm_search_limit;
-        
-        unsigned int kway_fm_search_limit;
+  KWayStopRule kway_stop_rule;
 
-        NodeWeight upper_bound_partition;
+  double kway_adaptive_limits_alpha;
 
-        double bank_account_factor;
+  double kway_adaptive_limits_beta;
 
-        RefinementSchedulingAlgorithm refinement_scheduling_algorithm; 
+  unsigned max_flow_iterations;
 
-        bool most_balanced_minimum_cuts;
-        
-        unsigned toposort_iterations;
+  unsigned local_multitry_rounds;
 
-        bool softrebalance;
+  unsigned local_multitry_fm_alpha;
 
-        bool rebalance;
+  bool graph_allready_partitioned;
 
-        double flow_region_factor;
+  unsigned int fm_search_limit;
 
-        bool gpa_grow_paths_between_blocks;
+  unsigned int kway_fm_search_limit;
 
-        //=======================================
-        //==========GLOBAL SEARCH PARAMETERS=====
-        //=======================================
-        unsigned global_cycle_iterations;
+  NodeWeight upper_bound_partition;
 
-        bool use_wcycles;
+  double bank_account_factor;
 
-        bool use_fullmultigrid;
+  RefinementSchedulingAlgorithm refinement_scheduling_algorithm;
 
-        unsigned level_split;
+  bool most_balanced_minimum_cuts;
 
-        bool no_new_initial_partitioning; 
+  unsigned toposort_iterations;
 
-        bool omit_given_partitioning; 
+  bool softrebalance;
 
-        StopRule stop_rule;
+  bool rebalance;
 
-        int num_vert_stop_factor;
-        
-        bool no_change_convergence;
+  double flow_region_factor;
 
-        //=======================================
-        //===PERFECTLY BALANCED PARTITIONING ====
-        //=======================================
-	bool remove_negative_cycles;
+  bool gpa_grow_paths_between_blocks;
 
-        bool kaba_include_removal_of_paths;
+  //=======================================
+  //==========GLOBAL SEARCH PARAMETERS=====
+  //=======================================
+  unsigned global_cycle_iterations;
 
-        bool kaba_enable_zero_weight_cycles;
+  bool use_wcycles;
 
-        double kabaE_internal_bal;
+  bool use_fullmultigrid;
 
-        CycleRefinementAlgorithm cycle_refinement_algorithm;
+  unsigned level_split;
 
-        int kaba_internal_no_aug_steps_aug;
+  bool no_new_initial_partitioning;
 
-        unsigned kaba_packing_iterations;
+  bool omit_given_partitioning;
 
-        bool kaba_flip_packings;
+  StopRule stop_rule;
 
-        MLSRule kaba_lsearch_p; // more localized search pseudo directed
+  int num_vert_stop_factor;
 
-        bool kaffpa_perfectly_balanced_refinement;
+  bool no_change_convergence;
 
-        unsigned kaba_unsucc_iterations;
+  //=======================================
+  //===PERFECTLY BALANCED PARTITIONING ====
+  //=======================================
+  bool remove_negative_cycles;
 
-        
-        //=======================================
-        //============PAR_PSEUDOMH / MH =========
-        //=======================================
-	double time_limit;
+  bool kaba_include_removal_of_paths;
 
-        double epsilon;
+  bool kaba_enable_zero_weight_cycles;
 
-	unsigned no_unsuc_reps;
+  double kabaE_internal_bal;
 
-	unsigned local_partitioning_repetitions;
+  CycleRefinementAlgorithm cycle_refinement_algorithm;
 
-        bool mh_plain_repetitions;
-        
-        bool mh_easy_construction;
+  int kaba_internal_no_aug_steps_aug;
 
-        bool mh_enable_gal_combine;
+  unsigned kaba_packing_iterations;
 
-        bool mh_no_mh;
+  bool kaba_flip_packings;
 
-        bool mh_print_log;
+  MLSRule kaba_lsearch_p; // more localized search pseudo directed
 
-        int  mh_flip_coin;
+  bool kaffpa_perfectly_balanced_refinement;
 
-        int  mh_initial_population_fraction;
+  unsigned kaba_unsucc_iterations;
 
-        bool mh_disable_cross_combine;
+  //=======================================
+  //============PAR_PSEUDOMH / MH =========
+  //=======================================
+  double time_limit;
 
-        bool mh_cross_combine_original_k;
+  double epsilon;
 
-        bool mh_disable_nc_combine;
+  unsigned no_unsuc_reps;
 
-        bool mh_disable_combine;
+  unsigned local_partitioning_repetitions;
 
-        bool mh_enable_quickstart;
+  bool mh_plain_repetitions;
 
-        bool mh_disable_diversify_islands;
+  bool mh_easy_construction;
 
-        bool mh_diversify;
+  bool mh_enable_gal_combine;
 
-        bool mh_diversify_best;
+  bool mh_no_mh;
 
-        bool mh_enable_tournament_selection;
+  bool mh_print_log;
 
-        bool mh_optimize_communication_volume;
+  int mh_flip_coin;
 
-        unsigned mh_num_ncs_to_compute;
+  int mh_initial_population_fraction;
 
-        unsigned mh_pool_size;
+  bool mh_disable_cross_combine;
 
-        bool combine; // in this case the second index is filled and edges between both partitions are not contracted
+  bool mh_cross_combine_original_k;
 
-        unsigned initial_partition_optimize_fm_limits;
+  bool mh_disable_nc_combine;
 
-        unsigned initial_partition_optimize_multitry_fm_alpha;
+  bool mh_disable_combine;
 
-        unsigned initial_partition_optimize_multitry_rounds;
+  bool mh_enable_quickstart;
 
-        unsigned walshaw_mh_repetitions;
+  bool mh_disable_diversify_islands;
 
-        unsigned scaleing_factor;
+  bool mh_diversify;
 
-        bool scale_back;
+  bool mh_diversify_best;
 
-	bool suppress_partitioner_output;
+  bool mh_enable_tournament_selection;
 
-        unsigned maxT; 
-        
-        unsigned maxIter;
-        //=======================================
-        //===============BUFFOON=================
-        //=======================================
-        bool disable_hard_rebalance;
+  bool mh_optimize_communication_volume;
 
-        bool buffoon;
+  unsigned mh_num_ncs_to_compute;
 
-        bool kabapE;
-        
-        bool mh_penalty_for_unconnected;
-        //=======================================
-        //===============MISC====================
-        //=======================================
-        std::string input_partition;
+  unsigned mh_pool_size;
 
-        int seed;
+  bool combine; // in this case the second index is filled and edges between both partitions are not contracted
 
-        bool fast;
+  unsigned initial_partition_optimize_fm_limits;
 
-        bool eco;
+  unsigned initial_partition_optimize_multitry_fm_alpha;
 
-        bool strong;
+  unsigned initial_partition_optimize_multitry_rounds;
 
-        bool kaffpaE;
+  unsigned walshaw_mh_repetitions;
 
-	bool balance_edges;
+  unsigned scaleing_factor;
 
-        // number of blocks the graph should be partitioned in
-        PartitionID k;
+  bool scale_back;
 
-        bool compute_vertex_separator;
+  bool suppress_partitioner_output;
 
-        bool only_first_level;
+  unsigned maxT;
 
-        bool use_balance_singletons;
+  unsigned maxIter;
+  //=======================================
+  //===============BUFFOON=================
+  //=======================================
+  bool disable_hard_rebalance;
 
-        int amg_iterations;
+  bool buffoon;
 
-        std::string graph_filename;
+  bool kabapE;
 
-        std::string filename_output;
+  bool mh_penalty_for_unconnected;
+  //=======================================
+  //===============MISC====================
+  //=======================================
+  std::string input_partition;
 
-        bool kaffpa_perfectly_balance;
+  int seed;
 
-        //=======================================
-        //===========SNW PARTITIONING============
-        //=======================================
-        NodeOrderingType node_ordering;
+  bool fast;
 
-        int cluster_coarsening_factor; 
+  bool eco;
 
-        bool ensemble_clusterings; 
+  bool strong;
 
-        int label_iterations;
+  bool kaffpaE;
 
-        int label_iterations_refinement;
+  bool balance_edges;
 
-        int number_of_clusterings;
+  // number of blocks the graph should be partitioned in
+  PartitionID k;
 
-        bool label_propagation_refinement;
+  bool compute_vertex_separator;
 
-        double balance_factor;
+  bool only_first_level;
 
-        bool cluster_coarsening_during_ip;
+  bool use_balance_singletons;
 
-        bool set_upperbound;
+  int amg_iterations;
 
-        int repetitions;
+  std::string graph_filename;
 
-        
-        //=======================================
-        //=========LABEL PROPAGATION=============
-        //=======================================
-        NodeWeight cluster_upperbound;
+  std::string filename_output;
 
-        //=======================================
-        //=========INITIAL PARTITIONING==========
-        //=======================================
+  std::string mapping_filename;
 
-        // variables controling the size of the blocks during 
-        // multilevel recursive bisection
-        // (for the case where k is not a power of 2)
-        std::vector<int> target_weights;
+  bool kaffpa_perfectly_balance;
 
-        bool initial_bipartitioning;
+  //=======================================
+  //===========SNW PARTITIONING============
+  //=======================================
+  NodeOrderingType node_ordering;
 
-        int grow_target;
+  int cluster_coarsening_factor;
 
-        //=======================================
-        //===============QAP=====================
-        //=======================================
+  bool ensemble_clusterings;
 
-        int communication_neighborhood_dist;
+  int label_iterations;
 
-        LsNeighborhoodType ls_neighborhood;
+  int label_iterations_refinement;
 
-	bool active_pairs;
+  int number_of_clusterings;
 
-        ConstructionAlgorithm construction_algorithm;
+  bool label_propagation_refinement;
 
-        DistanceConstructionAlgorithm distance_construction_algorithm;
+  double balance_factor;
 
-        std::vector< int > group_sizes;
+  bool cluster_coarsening_during_ip;
 
-        std::vector< int > distances;
+  bool set_upperbound;
 
-	int search_space_s;
+  int repetitions;
 
-        bool slow_mapping;
+  //=======================================
+  //=========LABEL PROPAGATION=============
+  //=======================================
+  NodeWeight cluster_upperbound;
 
-        PreConfigMapping preconfiguration_mapping;
+  //=======================================
+  //=========INITIAL PARTITIONING==========
+  //=======================================
 
-        int max_recursion_levels_construction; 
+  // variables controling the size of the blocks during
+  // multilevel recursive bisection
+  // (for the case where k is not a power of 2)
+  std::vector<int> target_weights;
 
-        bool enable_cycle_local_search;
+  bool initial_bipartitioning;
 
-        bool enable_group_local_search;
+  int grow_target;
 
-        //=======================================
-        //===============Shared Mem OMP==========
-        //=======================================
-        bool enable_omp;
+  //=======================================
+  //===============QAP=====================
+  //=======================================
 
-        void LogDump(FILE *out) const {
-        }
+  int communication_neighborhood_dist;
+
+  LsNeighborhoodType ls_neighborhood;
+
+  bool active_pairs;
+
+  ConstructionAlgorithm construction_algorithm;
+
+  DistanceConstructionAlgorithm distance_construction_algorithm;
+
+  std::vector<int> group_sizes;
+
+  std::vector<int> distances;
+
+  int search_space_s;
+
+  bool slow_mapping;
+
+  PreConfigMapping preconfiguration_mapping;
+
+  int max_recursion_levels_construction;
+
+  bool enable_cycle_local_search;
+
+  bool enable_group_local_search;
+
+  //=======================================
+  //===============Shared Mem OMP==========
+  //=======================================
+  bool enable_omp;
+
+  void LogDump(FILE *out) const {
+  }
 };
-
 
 #endif /* end of include guard: PARTITION_CONFIG_DI1ES4T0 */

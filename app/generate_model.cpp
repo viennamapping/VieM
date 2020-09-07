@@ -10,7 +10,7 @@
 #include <regex.h>
 #include <sstream>
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 
 #include "balance_configuration.h"
 #include "data_structure/graph_access.h"
@@ -29,82 +29,91 @@
 
 int main(int argn, char **argv) {
 
-        PartitionConfig config;
-        std::string graph_filename;
+  PartitionConfig config;
+  std::string graph_filename;
 
-        bool is_graph_weighted = false;
-        bool suppress_output   = false;
-        bool recursive         = false;
-       
-        int ret_code = parse_parameters(argn, argv, 
-                                        config, 
-                                        graph_filename, 
-                                        is_graph_weighted, 
-                                        suppress_output, recursive); 
+  bool is_graph_weighted = false;
+  bool suppress_output = false;
+  bool recursive = false;
 
-        if(ret_code) {
-                return 0;
-        }
+  int ret_code = parse_parameters(argn, argv,
+								  config,
+								  graph_filename,
+								  is_graph_weighted,
+								  suppress_output, recursive);
 
-        std::streambuf* backup = std::cout.rdbuf();
-        std::ofstream ofs;
-        ofs.open("/dev/null");
-        if(suppress_output) {
-                std::cout.rdbuf(ofs.rdbuf()); 
-        }
+  if (ret_code) {
+	return 0;
+  }
 
-        config.LogDump(stdout);
-        graph_access G;     
+  std::streambuf *backup = std::cout.rdbuf();
+  std::ofstream ofs;
+  ofs.open("/dev/null");
+  if (suppress_output) {
+	std::cout.rdbuf(ofs.rdbuf());
+  }
 
-        timer_x t;
-        graph_io::readGraphWeighted(G, graph_filename);
-        std::cout << "io time: " << t.elapsed()  << std::endl;
-       
-        G.set_partition_count(config.k); 
+  config.LogDump(stdout);
+  graph_access G;
 
-        balance_configuration bc;
-        bc.configurate_balance( config, G);
+  timer_x t;
+  graph_io::readGraphWeighted(G, graph_filename);
+  std::cout << "io time: " << t.elapsed() << std::endl;
 
-        srand(config.seed);
-        random_functions::setSeed(config.seed);
+  G.set_partition_count(config.k);
 
-        // ***************************** perform mapping ***************************************       
-        t.restart();
- 
-        srand(config.seed);
-        random_functions::setSeed(config.seed);
+  balance_configuration bc;
+  bc.configurate_balance(config, G);
 
-        std::cout <<  "graph has " <<  G.number_of_nodes() <<  " nodes and " <<  G.number_of_edges() <<  " edges"  << std::endl;
-        // ***************************** perform partitioning ***************************************       
-        t.restart();
-        graph_partitioner partitioner;
+  srand(config.seed);
+  random_functions::setSeed(config.seed);
 
-        std::cout <<  "performing partitioning! " << std::endl;
+  // ***************************** perform mapping ***************************************
+  t.restart();
 
-        partitioner.perform_partitioning(config, G);
+  srand(config.seed);
+  random_functions::setSeed(config.seed);
 
-        std::cout << "partitioning took " << t.elapsed()  << std::endl;
+  std::cout << "graph has " << G.number_of_nodes() << " nodes and " << G.number_of_edges() << " edges" << std::endl;
+  // ***************************** perform partitioning ***************************************
+  t.restart();
+  graph_partitioner partitioner;
 
-        graph_access C;
-        complete_boundary boundary(&G);
-        boundary.build();
-        boundary.getUnderlyingQuotientGraph(C);
+  std::cout << "performing partitioning! " << std::endl;
 
-        forall_nodes(C, node) {
-                C.setNodeWeight(node, 1);
-        } endfor
-        std::cout <<  "model has " << C.number_of_nodes() << " nodes, " << C.number_of_edges() <<  " edges "  << std::endl;
-        std::cout <<  "writing model of computation and communication to disk"  << std::endl;
-        
-        std::stringstream filename;
-        if(!config.filename_output.compare("")) {
-                filename << "model.graph";
-        } else {
-                filename << config.filename_output;
-        }
+  partitioner.perform_partitioning(config, G);
 
-        graph_io::writeGraphWeighted( C, filename.str());
-         
-        ofs.close();
-        std::cout.rdbuf(backup);
+  std::cout << "partitioning took " << t.elapsed() << std::endl;
+
+  graph_access C;
+  complete_boundary boundary(&G);
+  boundary.build();
+  boundary.getUnderlyingQuotientGraph(C);
+
+  forall_nodes(C, node)
+	  {
+		C.setNodeWeight(node, 1);
+	  }
+  endfor
+  std::cout << "model has " << C.number_of_nodes() << " nodes, " << C.number_of_edges() << " edges " << std::endl;
+  std::cout << "writing model of computation and communication to disk" << std::endl;
+
+  std::stringstream filename;
+  if (!config.filename_output.compare("")) {
+	filename << "model.graph";
+  } else {
+	filename << config.filename_output;
+  }
+
+  graph_io::writeGraphWeighted(C, filename.str());
+
+  std::stringstream mapping_filename;
+  if (config.mapping_filename.compare("") != 0) {
+	mapping_filename << config.mapping_filename;
+	std::cout << "writing partition ID of vertices to disk" << std::endl;
+	graph_io::writePartition(G, mapping_filename.str());
+  }
+
+  ofs.close();
+  std::cout.rdbuf(backup);
 }
